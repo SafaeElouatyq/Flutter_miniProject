@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mini_project/pages/contacts_page.dart';
 
 void main(){
   runApp(const MyApp());
@@ -29,7 +30,7 @@ class Home extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
-        child: Text("Welcome to my flutter app"),
+        child: Text("Welcome to the home page"),
       ),
       drawer: Drawer(
         child: ListView(
@@ -48,9 +49,14 @@ class Home extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
               },
             ),
+
             ListTile(
               leading: Icon(Icons.contacts),
               title: Text("Contacts"),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>ContactsPage()));
+              },
             ), ListTile(
               leading: Icon(Icons.article),
               title: Text("Posts"),
