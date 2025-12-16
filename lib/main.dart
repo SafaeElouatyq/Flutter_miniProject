@@ -28,6 +28,20 @@ class Home extends StatelessWidget {
       appBar: AppBar(title: Text("Flutter Project"),
         centerTitle: true,
       ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              child:CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage("assets/images/avatar.jpeg"),
+              ) ,
+              
+            ),
+
+          ],
+        ),
+      ),
     );
   }
 }
