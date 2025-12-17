@@ -104,6 +104,10 @@ class _ContactsPageState extends State<ContactsPage> {
                       ),
                       title: Text(contact.name),
                       subtitle: Text(contact.phone),
+                      trailing: IconButton(icon: Icon(Icons.delete),onPressed: (){setState(() {
+                        contacts.remove(contact);
+                        filteredContacts = contacts;
+                      });},),
                     ),
                     Divider(),
                   ],
