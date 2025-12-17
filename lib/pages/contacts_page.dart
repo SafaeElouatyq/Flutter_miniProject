@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mini_project/pages/add_contact.dart';
 import '../models/contact.dart';
 
 class ContactsPage extends StatefulWidget {
@@ -11,12 +12,10 @@ class ContactsPage extends StatefulWidget {
 class _ContactsPageState extends State<ContactsPage> {
   List<Contact> contacts = [
     Contact(name: "Safae", phone: "1234567890"),
-    Contact(name: "mustapha", phone: "9876543210"),
-
+    Contact(name: "Mustapha", phone: "9876543210"),
   ];
 
   List<Contact> filteredContacts = [];
-
   final TextEditingController searchController = TextEditingController();
 
   @override
@@ -48,25 +47,46 @@ class _ContactsPageState extends State<ContactsPage> {
       ),
       body: Column(
         children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(10, 30, 10, 20),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: searchController,
+                    decoration: InputDecoration(
+                      labelText: "Search by name or phone",
+                      border: OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.clear),
+                        onPressed: () {
+                          searchController.clear();
+                          filterContacts('');
+                        },
+                      ),
+                    ),
+                    onChanged: filterContacts,
+                  ),
+                ),
+                SizedBox(width: 10),
+                FloatingActionButton(
+                  mini: true,
+                  child: Icon(Icons.add),
+                  onPressed: () async {
+                    final newContact = await Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddContactPage()),
+                    );
 
-          Container(
-            width: 300,
-            height: 50,
-            margin: EdgeInsets.fromLTRB(10, 30, 10, 20), // left, top, right, bottom
-            child: TextField(
-              controller: searchController,
-              decoration: InputDecoration(
-                labelText: "Search by name or phone",
-                border: OutlineInputBorder(),
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.clear),
-                  onPressed: () {
-                    searchController.clear();
-                    filterContacts('');
+                    if (newContact != null) {
+                      setState(() {
+                        contacts.add(newContact);
+                        filteredContacts = contacts;
+                      });
+                    }
                   },
                 ),
-              ),
-              onChanged: filterContacts,
+              ],
             ),
           ),
 
@@ -79,7 +99,7 @@ class _ContactsPageState extends State<ContactsPage> {
                 return Column(
                   children: [
                     ListTile(
-                      leading:CircleAvatar(
+                      leading: CircleAvatar(
                         child: Text(contact.name[0].toUpperCase()),
                       ),
                       title: Text(contact.name),
