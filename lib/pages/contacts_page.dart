@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mini_project/pages/add_contact.dart';
 import '../models/contact.dart';
+import 'add_contact.dart';
 
 class ContactsPage extends StatefulWidget {
   const ContactsPage({super.key});
@@ -25,16 +25,12 @@ class _ContactsPageState extends State<ContactsPage> {
   }
 
   void filterContacts(String query) {
-    final filtered = contacts.where((contact) {
-      final nameLower = contact.name.toLowerCase();
-      final phoneLower = contact.phone.toLowerCase();
-      final queryLower = query.toLowerCase();
-
-      return nameLower.contains(queryLower) || phoneLower.contains(queryLower);
-    }).toList();
-
+    final q = query.toLowerCase();
     setState(() {
-      filteredContacts = filtered;
+      filteredContacts = contacts.where((c) {
+        return c.name.toLowerCase().contains(q) ||
+            c.phone.toLowerCase().contains(q);
+      }).toList();
     });
   }
 
@@ -48,7 +44,7 @@ class _ContactsPageState extends State<ContactsPage> {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.fromLTRB(10, 30, 10, 20),
+            padding: const EdgeInsets.fromLTRB(10, 30, 10, 20),
             child: Row(
               children: [
                 Expanded(
@@ -58,7 +54,7 @@ class _ContactsPageState extends State<ContactsPage> {
                       labelText: "Search by name or phone",
                       border: OutlineInputBorder(),
                       suffixIcon: IconButton(
-                        icon: Icon(Icons.clear),
+                        icon: const Icon(Icons.clear),
                         onPressed: () {
                           searchController.clear();
                           filterContacts('');
@@ -68,14 +64,16 @@ class _ContactsPageState extends State<ContactsPage> {
                     onChanged: filterContacts,
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 FloatingActionButton(
                   mini: true,
-                  child: Icon(Icons.add),
+                  child: const Icon(Icons.add),
                   onPressed: () async {
                     final newContact = await Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AddContactPage()),
+                      MaterialPageRoute(
+                        builder: (_) => const AddContactPage(),
+                      ),
                     );
 
                     if (newContact != null) {
@@ -89,8 +87,6 @@ class _ContactsPageState extends State<ContactsPage> {
               ],
             ),
           ),
-
-
           Expanded(
             child: ListView.builder(
               itemCount: filteredContacts.length,
@@ -104,12 +100,36 @@ class _ContactsPageState extends State<ContactsPage> {
                       ),
                       title: Text(contact.name),
                       subtitle: Text(contact.phone),
-                      trailing: IconButton(icon: Icon(Icons.delete),onPressed: (){setState(() {
-                        contacts.remove(contact);
-                        filteredContacts = contacts;
-                      });},),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.edit),
+                            onPressed: () async {
+                              final updated = await Navigator.push(context, MaterialPageRoute(builder: (context)=>AddContactPage(
+                                contact:contact,
+                              )),);
+
+                              if (updated != null) {
+                                setState(() {
+                                  filteredContacts = contacts;
+                                });
+                              }
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                            onPressed: () {
+                              setState(() {
+                                contacts.remove(contact);
+                                filteredContacts = contacts;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                    Divider(),
+                    const Divider(),
                   ],
                 );
               },
