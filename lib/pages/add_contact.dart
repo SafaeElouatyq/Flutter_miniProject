@@ -42,7 +42,7 @@ class _AddContactPageState extends State<AddContactPage> {
             children: [
               TextFormField(
                 controller: nameController,
-                decoration: const InputDecoration(
+                decoration:  InputDecoration(
                   labelText: "Name",
                   border: OutlineInputBorder(),
                 ),

@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mini_project/pages/contacts_page.dart';
+import 'package:flutter_mini_project/pages/notes_page.dart';
 
 void main(){
   runApp(const MyApp());
@@ -61,7 +62,6 @@ class Home extends StatelessWidget {
             ), ListTile(
               leading: Icon(Icons.article),
               title: Text("Posts"),
-
             ),
             ListTile(
               leading: Icon(Icons.person),
@@ -74,7 +74,14 @@ class Home extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.chat),
               title: Text("chatbot"),
-            )
+            ),ListTile(
+              leading : Icon(Icons.edit_note),
+              title: Text("Notes"),
+              onTap: (){
+               Navigator.pop(context);
+               Navigator.push(context, MaterialPageRoute(builder: (context)=>NotesPage()));
+               },
+            ),
           ],
         ),
       ),
