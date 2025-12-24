@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import '../models/note.dart';
 
 class AddNote extends StatefulWidget {
-  const AddNote({super.key});
+  final Note? note;
+  const AddNote({super.key, this.note});
 
   @override
   State<AddNote> createState() => _AddNoteState();
@@ -14,10 +15,21 @@ class _AddNoteState extends State<AddNote> {
   final TextEditingController textController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.note != null) {
+      titleController.text = widget.note!.title;
+      textController.text = widget.note!.text;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final bool isEdit = widget.note != null;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add a new note"),
+        title: Text(isEdit ? "Edit Note" : "Add Note"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -57,16 +69,21 @@ class _AddNoteState extends State<AddNote> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-
-                    final newNote = Note(
-                      title: titleController.text,
-                      text: textController.text,
-                      checked: false,
-                    );
-                    Navigator.pop(context, newNote);
+                    if (isEdit) {
+                      widget.note!.title = titleController.text;
+                      widget.note!.text = textController.text;
+                      Navigator.pop(context, widget.note);
+                    } else {
+                      final newNote = Note(
+                        title: titleController.text,
+                        text: textController.text,
+                        checked: false,
+                      );
+                      Navigator.pop(context, newNote);
+                    }
                   }
                 },
-                child: const Text("Add"),
+                child: Text(isEdit ? "Update" : "Add"),
               ),
             ],
           ),

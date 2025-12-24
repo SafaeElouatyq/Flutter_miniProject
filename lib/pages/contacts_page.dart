@@ -71,9 +71,7 @@ class _ContactsPageState extends State<ContactsPage> {
                   onPressed: () async {
                     final newContact = await Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => const AddContactPage(),
-                      ),
+                      MaterialPageRoute(builder: (_) => const AddContactPage()),
                     );
 
                     if (newContact != null) {
@@ -106,9 +104,13 @@ class _ContactsPageState extends State<ContactsPage> {
                           IconButton(
                             icon: const Icon(Icons.edit),
                             onPressed: () async {
-                              final updated = await Navigator.push(context, MaterialPageRoute(builder: (context)=>AddContactPage(
-                                contact:contact,
-                              )),);
+                              final updated = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AddContactPage(contact: contact),
+                                ),
+                              );
 
                               if (updated != null) {
                                 setState(() {
