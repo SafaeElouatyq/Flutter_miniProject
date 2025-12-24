@@ -12,8 +12,12 @@ class NotesPage extends StatefulWidget {
 
 class _NotesPageState extends State<NotesPage> {
 
+
   List<Note> Notes=[
-    Note(text: "note number 1"),
+    Note(
+        title: "note number 1",
+        text: "do abc",
+        checked: false),
   ];
   @override
   Widget build(BuildContext context) {
@@ -24,21 +28,64 @@ class _NotesPageState extends State<NotesPage> {
       ),
       body:ListView.builder(itemCount : Notes.length,itemBuilder: (context,index){
         final n = Notes[index];
-        return Column(
-          children: [
-            ListTile(
-
-              leading: Icon(Icons.square_outlined),
-              title: Text(n.text),
-            )
-          ],
+        return Card(
+          margin:  EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(7),
+          ),
+          child: ListTile(
+            onTap: () {
+              setState(() {
+                n.checked = !n.checked;
+              });
+            },
+            leading: Icon(
+              n.checked
+                  ? Icons.check_box
+                  : Icons.check_box_outline_blank,
+              color: n.checked ? Colors.green : Colors.grey,
+            ),
+            title: Text(
+              n.title,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                decoration:
+                n.checked ? TextDecoration.lineThrough : null,
+              ),
+            ),
+            subtitle: Text(
+              n.text,
+              style: TextStyle(
+                fontSize: 15,
+                decoration:
+                n.checked ? TextDecoration.lineThrough : null,
+                color: Colors.grey[700],
+              ),
+            ),
+          ),
         );
+
       })
       ,
-      floatingActionButton: FloatingActionButton(child:Icon(Icons.add),onPressed: (){
-        Navigator.pop(context);
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>AddNote()));
-      }),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add, color: Colors.white),
+        backgroundColor: Colors.grey,
+        shape: const CircleBorder(),
+        onPressed: () async {
+          final newNote = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddNote()),
+          );
+
+          if (newNote != null) {
+            setState(() {
+              Notes.add(newNote);
+            });
+          }
+        },
+      ),
 
     );
   }
