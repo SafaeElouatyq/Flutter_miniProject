@@ -44,7 +44,6 @@ class _AddContactPageState extends State<AddContactPage> {
                 controller: nameController,
                 decoration:  InputDecoration(
                   labelText: "Name",
-                  border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -58,7 +57,6 @@ class _AddContactPageState extends State<AddContactPage> {
                 controller: phoneController,
                 decoration: const InputDecoration(
                   labelText: "Phone",
-                  border: OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.phone,
                 validator: (value) {
