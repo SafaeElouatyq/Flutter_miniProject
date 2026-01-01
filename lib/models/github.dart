@@ -5,7 +5,11 @@ part 'github.g.dart';
 @JsonSerializable()
 class Github {
   final String login;
+
+  @JsonKey(name: 'avatar_url')
   final String avatarUrl;
+
+  @JsonKey(name: 'html_url')
   final String htmlUrl;
 
   Github({
@@ -14,8 +18,6 @@ class Github {
     required this.htmlUrl,
   });
 
-  factory Github.fromJson(Map<String, dynamic> json)
-  => _$GithubFromJson(json);
-
-
+  factory Github.fromJson(Map<String, dynamic> json) =>
+      _$GithubFromJson(json);
 }
