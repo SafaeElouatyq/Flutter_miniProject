@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mini_project/pages/contacts_page.dart';
 import 'package:flutter_mini_project/pages/notes_page.dart';
+import 'package:flutter_mini_project/pages/posts.dart';
 import 'package:flutter_mini_project/theme/app_colors.dart';
 import 'package:flutter_mini_project/theme/app_theme.dart';
 
@@ -31,7 +32,6 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       appBar: AppBar(title: Text("Flutter Project"),
         centerTitle: true,
       ),
@@ -43,7 +43,7 @@ class Home extends StatelessWidget {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: AppColors.primary,
+                color: AppColors.primary.withOpacity(0.8),
               ),
               child:CircleAvatar(
                 radius: 50,
@@ -52,7 +52,7 @@ class Home extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.home,color: AppColors.primary),
-              title: Text("Home"),
+              title: Text("Home",style: TextStyle(color: AppColors.primary),),
               onTap: (){
                 Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
@@ -69,6 +69,11 @@ class Home extends StatelessWidget {
             ), ListTile(
               leading: Icon(Icons.article,color: AppColors.primary),
               title: Text("Posts"),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Posts()));
+
+              },
             ),
             ListTile(
               leading: Icon(Icons.person,color: AppColors.primary),
@@ -81,8 +86,7 @@ class Home extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.chat,color: AppColors.primary),
               title: Text("chatbot"),
-            ),
-            ListTile(
+            ),ListTile(
               leading : Icon(Icons.edit_note,color: AppColors.primary),
               title: Text("Notes"),
               onTap: (){
