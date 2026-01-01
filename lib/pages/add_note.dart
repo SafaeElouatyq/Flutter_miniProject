@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mini_project/theme/app_colors.dart';
 import '../models/note.dart';
 
 class AddNote extends StatefulWidget {
@@ -41,7 +42,6 @@ class _AddNoteState extends State<AddNote> {
                 controller: titleController,
                 decoration: const InputDecoration(
                   labelText: "Title",
-                  border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -55,7 +55,6 @@ class _AddNoteState extends State<AddNote> {
                 controller: textController,
                 decoration: const InputDecoration(
                   labelText: "Description",
-                  border: OutlineInputBorder(),
                 ),
                 maxLines: 3,
                 validator: (value) {
@@ -83,6 +82,13 @@ class _AddNoteState extends State<AddNote> {
                     }
                   }
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  )
+                ),
                 child: Text(isEdit ? "Update" : "Add"),
               ),
             ],

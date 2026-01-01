@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mini_project/theme/app_colors.dart';
 import '../models/contact.dart';
 
 class AddContactPage extends StatefulWidget {
@@ -44,7 +45,6 @@ class _AddContactPageState extends State<AddContactPage> {
                 controller: nameController,
                 decoration:  InputDecoration(
                   labelText: "Name",
-                  border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -58,7 +58,6 @@ class _AddContactPageState extends State<AddContactPage> {
                 controller: phoneController,
                 decoration: const InputDecoration(
                   labelText: "Phone",
-                  border: OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.phone,
                 validator: (value) {
@@ -90,6 +89,13 @@ class _AddContactPageState extends State<AddContactPage> {
                     }
                   }
                 },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    )
+                ),
                 child: Text(isEdit ? "Update" : "Add Contact"),
               ),
             ],

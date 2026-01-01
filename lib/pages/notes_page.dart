@@ -19,7 +19,7 @@ class _NotesPageState extends State<NotesPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Notes"),
-        centerTitle: true,
+
       ),
       body: ListView.builder(
         itemCount: notes.length,
