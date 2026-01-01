@@ -43,7 +43,7 @@ class Home extends StatelessWidget {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.8),
+                color: AppColors.primary,
               ),
               child:CircleAvatar(
                 radius: 50,
@@ -52,7 +52,7 @@ class Home extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.home,color: AppColors.primary),
-              title: Text("Home",style: TextStyle(color: AppColors.primary),),
+              title: Text("Home"),
               onTap: (){
                 Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
