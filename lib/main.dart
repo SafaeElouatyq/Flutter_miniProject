@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mini_project/pages/contacts_page.dart';
+import 'package:flutter_mini_project/pages/github_page.dart';
 import 'package:flutter_mini_project/pages/notes_page.dart';
 import 'package:flutter_mini_project/pages/posts.dart';
 import 'package:flutter_mini_project/theme/app_colors.dart';
@@ -43,7 +44,7 @@ class Home extends StatelessWidget {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.8),
+                color: AppColors.primary,
               ),
               child:CircleAvatar(
                 radius: 50,
@@ -52,7 +53,7 @@ class Home extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.home,color: AppColors.primary),
-              title: Text("Home",style: TextStyle(color: AppColors.primary),),
+              title: Text("Home"),
               onTap: (){
                 Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
@@ -78,6 +79,10 @@ class Home extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.person,color: AppColors.primary),
               title: Text("Github users"),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>GithubPage()));
+              },
             ),
             ListTile(
               leading: Icon(Icons.cloud,color: AppColors.primary),
