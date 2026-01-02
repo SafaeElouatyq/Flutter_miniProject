@@ -1,17 +1,14 @@
-
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mini_project/pages/contacts_page.dart';
-import 'package:flutter_mini_project/pages/github_page.dart';
-import 'package:flutter_mini_project/pages/notes_page.dart';
-import 'package:flutter_mini_project/pages/posts.dart';
-import 'package:flutter_mini_project/theme/app_colors.dart';
-import 'package:flutter_mini_project/theme/app_theme.dart';
+import 'pages/weather_page.dart';
+import 'pages/contacts_page.dart';
+import 'pages/github_page.dart';
+import 'pages/notes_page.dart';
+import 'pages/posts.dart';
+import 'theme/app_colors.dart';
+import 'theme/app_theme.dart';
 
-void main(){
+void main() {
   runApp(const MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -21,8 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: appTheme,
-      home: Home(),
-
+      home: const Home(),
     );
   }
 }
@@ -33,71 +29,68 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Flutter Project"),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Text("Welcome to the home page"),
-      ),
+      appBar: AppBar(title: const Text("Flutter Project"), centerTitle: true),
+      body: const Center(child: Text("Welcome to the home page")),
       drawer: Drawer(
         child: ListView(
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(
-                color: AppColors.primary,
-              ),
-              child:CircleAvatar(
+              decoration: const BoxDecoration(color: AppColors.primary),
+              child: const CircleAvatar(
                 radius: 50,
                 backgroundImage: AssetImage("assets/images/avatar.jpeg"),
-              ) ,
+              ),
             ),
             ListTile(
-              leading: Icon(Icons.home,color: AppColors.primary),
-              title: Text("Home"),
-              onTap: (){
+              leading: const Icon(Icons.home, color: AppColors.primary),
+              title: const Text("Home"),
+              onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
-              },
-            ),
-
-            ListTile(
-              leading: Icon(Icons.contacts,color: AppColors.primary),
-              title: Text("Contacts"),
-              onTap: (){
-                Navigator.pop(context);
-                Navigator.push(context,MaterialPageRoute(builder: (context)=>ContactsPage()));
-              },
-            ), ListTile(
-              leading: Icon(Icons.article,color: AppColors.primary),
-              title: Text("Posts"),
-              onTap: (){
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Posts()));
-
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Home()),
+                );
               },
             ),
             ListTile(
-              leading: Icon(Icons.person,color: AppColors.primary),
-              title: Text("Github users"),
-              onTap: (){
+              leading: const Icon(Icons.contacts, color: AppColors.primary),
+              title: const Text("Contacts"),
+              onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>GithubPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ContactsPage()));
               },
             ),
             ListTile(
-              leading: Icon(Icons.cloud,color: AppColors.primary),
-              title: Text("weather"),
+              leading: const Icon(Icons.article, color: AppColors.primary),
+              title: const Text("Posts"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Posts()));
+              },
             ),
             ListTile(
-              leading: Icon(Icons.chat,color: AppColors.primary),
-              title: Text("chatbot"),
-            ),ListTile(
-              leading : Icon(Icons.edit_note,color: AppColors.primary),
-              title: Text("Notes"),
-              onTap: (){
-               Navigator.pop(context);
-               Navigator.push(context, MaterialPageRoute(builder: (context)=>NotesPage()));
-               },
+              leading: const Icon(Icons.person, color: AppColors.primary),
+              title: const Text("Github users"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => GithubPage()));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.cloud, color: AppColors.primary),
+              title: const Text("Weather"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const WeatherPage()));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.edit_note, color: AppColors.primary),
+              title: const Text("Notes"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => NotesPage()));
+              },
             ),
           ],
         ),
@@ -105,6 +98,3 @@ class Home extends StatelessWidget {
     );
   }
 }
-
-
-
