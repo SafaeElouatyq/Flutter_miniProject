@@ -86,6 +86,7 @@ class Home extends StatelessWidget {
               ),
             ),
             ListTile(
+
               leading: const Icon(Icons.home, color: AppColors.primary),
               title: const Text("Home"),
               onTap: () {
